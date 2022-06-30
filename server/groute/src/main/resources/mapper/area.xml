@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.groute.mapper.AreaMapper">
+    <insert id="insertArea" parameterType="Area">
+        insert into area(name, img, lat ,lng)
+        values(#{name}, #{img}, #{lat}, #{lng})
+    </insert>
+
+    <select id="selectArea" parameterType="int" resultType="Area">
+        select * from area
+        where id = #{id}
+        limit 1
+    </select>
+
+    <select id="selectAllArea"  resultType="Area">
+        select * from area
+    </select>
+
+    <delete id="deleteArea" parameterType="int">
+        delete from area
+        where id = #{id}
+    </delete>
+
+    <update id="updateArea" parameterType="Area">
+        update area
+        set name = #{name}, img = #{img}, lat = #{lat}, lng = #{lng}
+        where id = #{id}
+    </update>
+</mapper>

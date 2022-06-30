@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.groute.mapper.UserMapper">
+    <insert id="registerUser">
+        insert into user(id, password, email, phone, birth, type, nickname, gender, img)
+        values(#{id}, #{password}, #{email}, #{phone}, #{birth}, #{type}, #{nickname}, #{gender}, #{img})
+    </insert>
+
+    <select id="findById" resultType="com.ssafy.groute.dto.User">
+        select * from user
+        where id = #{userId}
+    </select>
+    <select id="findByUidType" resultType="com.ssafy.groute.dto.User">
+        select * from user
+        where id = #{userId} and type = #{type}
+    </select>
+
+    <delete id="deleteUser">
+        delete from user
+        where id = #{userId}
+    </delete>
+
+    <update id="updateUser">
+        update user
+        set nickname = #{nickname}, phone = #{phone}, gender = #{gender}, birth = #{birth}, email = #{email}, img = #{img}, type = #{type}, token = #{token}
+        where id = #{id}
+    </update>
+
+    <select id="selectByPlanId" parameterType="int" resultType="User">
+        select *
+        from user
+        where id in (select user_id from planshareuser where plan_id = #{planId})
+    </select>
+
+    <update id="updateTokenByUserId" parameterType="User">
+        update user
+        set token = #{token}
+        where id = #{id}
+    </update>
+
+    <select id="selectUserByToken" parameterType="String" resultType="User">
+        select *
+        from user
+        where token = #{token}
+    </select>
+    
+    <select id="selectUserIdByEmail" parameterType="String" resultType="User">
+        select id from user where email = #{email}
+    </select>
+
+    <select id="selectUserByIdEmail" parameterType="User" resultType="User">
+        select * from user where id = #{id} and email = #{email}
+    </select>
+
+    <update id="updatePassword" parameterType="User">
+        update user
+        set password = #{password}
+        where id = #{id}
+    </update>
+
+    <select id="selectAllUserList" resultType="User">
+        select id, token from user
+    </select>
+
+    <select id="selectEndedPlanYesterday" resultType="User">
+        select id, nickname, token
+        from user
+        where id IN ( select user_id
+                        from userplan
+                        where date(enddate) = date(subdate(now(), INTERVAL 1 DAY)) and user_id != 'admin')
+    </select>
+
+    <select id="selectOneDayBeforeTravel" resultType="User">
+        select id, nickname, token
+        from user
+        where id IN ( select user_id
+        from userplan
+        where date(now()) = date(subdate(date(startdate), INTERVAL 3 DAY)) and user_id != 'admin')
+    </select>
+
+    <select id="selectThreeDayBeforeTravel" resultType="User">
+        select id, nickname, token
+        from user
+        where id IN ( select user_id
+        from userplan
+        where date(now()) = date(subdate(date(startdate), INTERVAL 3 DAY)) and user_id != 'admin')
+    </select>
+
+    <select id="selectWeekBeforeTravel" resultType="User">
+        select id, nickname, token
+        from user
+        where id IN ( select user_id
+        from userplan
+        where date(now()) = date(subdate(date(startdate), INTERVAL 1 WEEK)) and user_id != 'admin')
+    </select>
+</mapper>

@@ -1,0 +1,44 @@
+server:
+  port: 8888
+
+logging:
+  level:
+    root: warn
+    com.ssafy.groute: debug
+
+spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+    freemarker:
+      cache: false
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://i6d109.p.ssafy.io:3306/groute?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: ssafy
+    password: ssafy
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jwt:
+    secret: DvqcGn8mnFjqSL4a
+
+#  servlet:
+  http:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+#      location: ../groute/src/main/resources/static/imgs # server static
+#      location: file:///C:/SSAFY/iamgroute/imgs/ # local
+      location: file:///iamgroute/imgs/  # aws ubuntu
+
+  firebase-sdk-path: firebase/firebase_service_key.json
+  file-loc: ../groute/src/main/resources/
+
+
+mybatis:
+  type-aliases-package: com.ssafy.groute.dto, com.ssafy.groute.dto.board
+  mapper-locations: mapper/**/*.xml

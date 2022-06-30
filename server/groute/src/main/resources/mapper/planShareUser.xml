@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.groute.mapper.PlanShareUserMapper">
+    <insert id="insertPlanShareUser" parameterType="PlanShareUser">
+        insert into planshareuser(plan_id, user_id)
+        values(#{planId}, #{userId})
+    </insert>
+
+    <resultMap id="PlanShareUserDTO" type="PlanShareUser">
+        <result column="plan_id" property="planId"></result>
+        <result column="user_id" property="userId"></result>
+    </resultMap>
+
+    <select id="selectPlanShareUser" parameterType="int" resultMap="PlanShareUserDTO">
+        select * from planshareuser
+        where id = #{id}
+    </select>
+
+    <select id="selectAllPlanShareUser"  resultMap="PlanShareUserDTO">
+        select * from planshareuser
+    </select>
+
+    <delete id="deletePlanShareUser" parameterType="int">
+        delete from planshareuser
+        where id = #{id}
+    </delete>
+
+    <delete id="deletePlanShareUserByPlanIdUserId" parameterType="PlanShareUser">
+        delete from planshareuser
+        where user_id = #{userId} and plan_id = #{planId}
+    </delete>
+
+    <update id="updatePlanShareUser" parameterType="PlanShareUser">
+        update planshareuser
+        set plan_id = #{planId}, user_id = #{userId}
+        where id = #{id}
+    </update>
+
+    <select id="selectByUserId" parameterType="String" resultMap="PlanShareUserDTO">
+        select * from planshareuser
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectByPlanId" parameterType="int" resultMap="PlanShareUserDTO">
+        select * from planshareuser
+        where plan_id = #{planId}
+    </select>
+
+    <delete id="deleteAllPlanShareUserByUId" parameterType="String">
+        delete from planshareuser
+        where user_id = #{userId}
+    </delete>
+
+    <select id="selectByUserIdPlanId" parameterType="PlanShareUser" resultType="int">
+        select count(*) from planshareuser
+        where user_id = #{userId} and plan_id = #{planId}
+    </select>
+</mapper>

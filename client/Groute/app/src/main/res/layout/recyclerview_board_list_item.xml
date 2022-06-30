@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="boardDetail"
+            type="com.ssafy.groute.src.dto.BoardDetail" />
+        <variable
+            name="user"
+            type="com.ssafy.groute.src.dto.User" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/boardItem_cL"
+        android:layout_width="match_parent"
+        android:layout_height="110dp">
+
+        <ImageView
+            android:id="@+id/board_iv_userImg"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:imageUrlUser="@{user.img}"/>
+
+        <TextView
+            android:id="@+id/board_tv_write_userNick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@{user.nickname}"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/board_iv_userImg"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/board_tv_writeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@{boardDetail.title}"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/board_iv_userImg" />
+
+        <TextView
+            android:id="@+id/board_tv_writeContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            android:text="@{boardDetail.content.length() > 15 ? boardDetail.content.substring(0, 15) : boardDetail.content}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/board_tv_writeTitle" />
+
+        <TextView
+            android:id="@+id/board_tv_writeDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@{boardDetail.createDate}"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/board_tv_writeContent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/board_tv_writeContent">
+
+            <ImageView
+                android:id="@+id/gooBtn"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/boardheartcnt"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/board_tv_goodCnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:text="@{String.valueOf(boardDetail.heartCnt)}"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/chatBtn"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/boardcommentcnt" />
+
+            <TextView
+                android:id="@+id/board_tv_chatCnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@{String.valueOf(boardDetail.commentCnt)}"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

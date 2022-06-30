@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.groute.mapper.AccountMapper">
+    <insert id="insertAccount" parameterType="Account">
+        insert into account(spentMoney, description, category_id, userplan_id, type, day)
+        values(#{spentMoney}, #{description}, #{categoryId}, #{userPlanId}, #{type}, #{day})
+    </insert>
+
+    <resultMap id="AccountDTO" type="Account">
+        <result column="userplan_id" property="userPlanId"></result>
+        <result column="category_id" property="categoryId"></result>
+    </resultMap>
+    <select id="selectAccount" parameterType="int" resultMap="AccountDTO">
+        select a.*, c.name categoryName, c.img from account a, accountcategory c
+        where id = #{id} and a.category_id = c.id
+    </select>
+
+    <select id="selectAllAccount"  resultMap="AccountDTO">
+        select a.*, c.name categoryName, c.img from account a, accountcategory c
+        where a.category_id = c.id
+    </select>
+
+    <delete id="deleteAccount" parameterType="int">
+        delete from account
+        where id = #{id}
+    </delete>
+
+    <update id="updateAccount" parameterType="Account">
+        update account
+        set spentMoney = #{spentMoney}, description = #{description}, category_id = #{categoryId}, type = #{type }, day = #{day}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAllAccountByRId" parameterType="int">
+        delete from account
+        where routes_id = #{routesId}
+    </delete>
+
+    <select id="selectByUserPlanId" parameterType="int" resultMap="AccountDTO">
+        select a.*, c.name categoryName, c.img from account a, accountcategory c
+        where userplan_id = #{userPlanId} and a.category_id = c.id
+    </select>
+
+    <delete id="deleteByUserPlanId" parameterType="int">
+        delete from account
+        where userplan_id = #{userPlanId}
+    </delete>
+    
+    <select id="totalCategoryPriceByPlanId" parameterType="int" resultType="int">
+        select sum(spentmoney)
+        from account
+        where userplan_id = #{userPlanId} and category_id = #{categoryId}
+    </select>
+</mapper>

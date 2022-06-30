@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="plan"
+            type="com.ssafy.groute.src.viewmodel.PlanViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/drawable_dialog_backgroud"
+        android:minWidth="300dp"
+        android:minHeight="200dp">
+
+        <ImageButton
+            android:id="@+id/memo_cancle"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/close_btn_img_black" />
+
+        <TextView
+            android:id="@+id/dayMemo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:text="memo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/memo_cancle" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/showmemo_btn_modify"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/drawable_button_stroke_left"
+                android:text="수정"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/showmemo_btn_delete"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/showmemo_btn_delete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/drawable_button_stoke_right"
+                android:text="삭제"
+                android:textColor="@color/blue_700"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/showmemo_btn_modify"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

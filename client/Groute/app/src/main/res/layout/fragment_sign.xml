@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".src.login.SignFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/logo2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/sign_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/imageView2"
+                app:layout_constraintStart_toStartOf="parent"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/join_til_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:errorEnabled="true"
+                    app:helperText="* 필수입력"
+                    app:helperTextEnabled="true"
+                    app:helperTextTextColor="#F44336">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/join_edit_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_background"
+                        android:hint="ID" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/join_til_pw"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:errorEnabled="true"
+                    app:helperText="* 필수입력"
+                    app:helperTextEnabled="true"
+                    app:helperTextTextColor="#F44336">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/join_edit_pw"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_background"
+                        android:hint="PASSWORD" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/join_til_nick"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:helperText="* 필수입력"
+                    app:helperTextEnabled="true"
+                    app:helperTextTextColor="#F44336">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/join_edit_nick"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_background"
+                        android:hint="NICKNAME" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/join_til_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:helperText="* 필수입력"
+                    app:helperTextEnabled="true"
+                    app:helperTextTextColor="#F44336">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/join_edit_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_background"
+                        android:hint="PHONE" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/join_til_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/join_edit_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:background="@drawable/edittext_background"
+                            android:hint="EMAIL" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:gravity="center"
+                        android:text=" @ "
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/join_til_domain"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="top"
+                        android:layout_weight="1">
+
+                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                            android:id="@+id/join_autoTv_domain"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:background="@drawable/edittext_background"
+                            android:completionThreshold="1">
+                        </androidx.appcompat.widget.AppCompatAutoCompleteTextView>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--                    <Spinner-->
+<!--                        android:id="@+id/emailSpinner"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="@drawable/edittext_background"-->
+<!--                        android:entries="@array/email_spinner"-->
+<!--                        android:visibility="visible" />-->
+
+<!--                    <com.google.android.material.textfield.TextInputLayout-->
+<!--                        android:id="@+id/join_til_writeEmail"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:visibility="gone">-->
+
+<!--                        <com.google.android.material.textfield.TextInputEditText-->
+<!--                            android:id="@+id/join_edit_writeEmail"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:background="@drawable/edittext_background" />-->
+<!--                    </com.google.android.material.textfield.TextInputLayout>-->
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="생년월일" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/join_spinner_year"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittext_background"
+                        android:entries="@array/birth_year_spinner"/>
+
+                    <Spinner
+                        android:id="@+id/join_spinner_month"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittext_background"
+                        android:entries="@array/birth_month_spinner" />
+
+                    <Spinner
+                        android:id="@+id/join_spinner_day"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittext_background"
+                        android:entries="@array/birth_day_spinner" />
+                </LinearLayout>
+
+
+                <RadioGroup
+                    android:id="@+id/join_genderGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="성별" />
+
+                    <RadioButton
+                        android:id="@+id/join_radio_man"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="남" />
+
+                    <RadioButton
+                        android:id="@+id/join_radio_woman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="여" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+        <Button
+            android:id="@+id/join_btn_join"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="#FFCC62"
+            android:text="JOIN"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sign_layout"
+            tools:ignore="NotSibling" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

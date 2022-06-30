@@ -1,0 +1,76 @@
+pipeline {
+    agent none
+    options { skipDefaultCheckout(true) }
+
+    stages {
+        stage('Checkout Repository') {
+//             options { skipDefaultCheckout(true) }
+
+            agent any
+
+            steps {
+                checkout scm
+            }
+
+            post {
+                success {
+                    echo 'prepare success'
+                }
+
+                always {
+                    echo 'done prepare'
+                }
+
+                cleanup {
+                    echo 'after all other post conditions'
+                }
+            }
+        }
+
+        stage('build gradle') {
+//             options { skipDefaultCheckout(true) }
+            agent any
+            steps {
+                dir('server/groute/') {
+//                     sh  'chmod +x gradlew; ./gradlew build'
+                    sh  'chmod +x gradlew'
+                    sh  './gradlew clean build -x test'
+
+                    sh 'ls -al ./build'
+                }
+            }
+            post {
+                success {
+                    echo 'gradle build success'
+                }
+
+                failure {
+                    echo 'gradle build failed'
+                }
+            }
+        }
+
+        stage('Docker build') {
+//             options { skipDefaultCheckout(true) }
+
+            agent any
+            steps {
+                dir('server/groute/') {
+                    sh 'docker build --build-arg JAR_FILE=build/libs/*.jar -t springboot-groute-image:latest .'
+                }
+            }
+        }
+
+        stage('Docker run') {
+//             options { skipDefaultCheckout(true) }
+
+            agent any
+            steps {
+                sh 'docker ps -f name=springboot-groute-container -q | xargs --no-run-if-empty docker container stop'
+                sh 'docker container ls -a -fname=springboot-groute-container -q | xargs -r docker container rm'
+                sh 'docker images --no-trunc --all --quiet --filter="dangling=true" | xargs --no-run-if-empty docker rmi'
+                sh 'docker run -d --name springboot-groute-container -v /home/ubuntu/iamgroute/imgs:/iamgroute/imgs -p 8888:8888 springboot-groute-image:latest'
+            }
+        }
+    }
+}

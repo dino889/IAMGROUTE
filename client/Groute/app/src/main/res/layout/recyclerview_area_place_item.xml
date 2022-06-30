@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="place"
+            type="com.ssafy.groute.src.dto.Place" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/areaPlace_iv_img"
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:imageUrlPlace="@{place.img}"/>
+
+        <TextView
+            android:id="@+id/areaPlace_tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:text="@{place.name}"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/area_abtn_heart"
+            app:layout_constraintStart_toEndOf="@+id/areaPlace_iv_img"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/area_abtn_heart"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="false"
+            app:lottie_fileName="heart.json"
+            app:lottie_loop="true" />
+
+        <TextView
+            android:id="@+id/areaPlace_tv_content"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:text="@{place.description}"
+            app:layout_constraintStart_toEndOf="@+id/areaPlace_iv_img"
+            app:layout_constraintTop_toBottomOf="@+id/areaPlace_tv_name" />
+
+        <RatingBar
+            android:id="@+id/areaPlace_rb_rating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:max="5"
+            android:rating="@{Float.valueOf(place.rate)}"
+            android:theme="@style/ratingBar"
+            app:layout_constraintStart_toEndOf="@+id/areaPlace_iv_img"
+            app:layout_constraintTop_toBottomOf="@+id/areaPlace_tv_content" />
+
+        <TextView
+            android:id="@+id/areaPlace_tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@{place.type}"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/view3"
+            app:layout_constraintStart_toEndOf="@+id/areaPlace_iv_img"
+            app:layout_constraintTop_toBottomOf="@+id/areaPlace_rb_rating" />
+<!--        android:text="관광명소 | 애월한림"-->
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="#404040"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/areaPlace_iv_img" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

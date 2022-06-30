@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.groute.mapper.UserPlanMapper">
+    <insert id="insertUserPlan" parameterType="UserPlan">
+        insert into userplan(user_id, title, description, startDate, endDate, totalDate, isPublic, area_id)
+        values(#{userId}, #{title}, #{description}, #{startDate}, #{endDate}, #{totalDate}, #{isPublic}, #{areaId})
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <resultMap id="UserPlanDTO" type="UserPlan">
+        <result column="user_id" property="userId"></result>
+        <result column="area_id" property="areaId"></result>
+    </resultMap>
+
+    <select id="selectUserPlan" parameterType="int" resultMap="UserPlanDTO">
+        select id, user_id, title, description, startDate, endDate, totalDate, isPublic, round(rate,2) rate, heartCnt, area_id
+        from userplan
+        where id = #{id}
+    </select>
+
+    <select id="selectAllUserPlan"  resultMap="UserPlanDTO">
+        select u.id, u.user_id, u.title, u.description, u.startDate, u.endDate, u.totalDate, u.isPublic, round(u.rate,2) rate, u.heartCnt, u.area_id,
+               (select count(*) from planreview p where p.userplan_id = u.id) as reviewCnt
+        from userplan u;
+    </select>
+
+    <select id="selectAllUserPlanByUserId" parameterType="String" resultMap="UserPlanDTO">
+        select u.id, u.user_id, u.title, u.description, u.startDate, u.endDate, u.totalDate, u.isPublic, round(u.rate,2) rate, u.heartCnt, u.area_id,
+               (select count(*) from planreview p where p.userplan_id = u.id) as reviewCnt
+        from userplan u
+        where u.id IN (select plan_id from planshareuser where user_id = #{userId})
+        order by startDate asc
+    </select>
+
+    <select id="selectTUserPlan"  resultMap="UserPlanDTO">
+        select u.id, u.user_id, u.title, u.description, u.startDate, u.endDate, u.totalDate, u.isPublic, round(u.rate,2) rate, u.heartCnt, u.area_id,
+               (select count(*) from planreview p where p.userplan_id = u.id) as reviewCnt
+        from userplan u
+        where ispublic = "T"
+    </select>
+
+    <select id="bestPlanList" resultMap="UserPlanDTO">
+        select id, user_id, title, description, startDate, endDate, totalDate, isPublic, round(rate,2) rate, heartCnt, area_id
+        from userplan
+        order by heartcnt desc
+        limit 5
+    </select>
+
+    <delete id="deleteUserPlan" parameterType="int">
+        delete from userplan
+        where id = #{id}
+    </delete>
+
+    <update id="updateUserPlan" parameterType="UserPlan">
+        update userplan
+        set user_id = #{userId}, title = #{title}, description = #{description}, startDate = #{startDate}, endDate = #{endDate}, totalDate = #{totalDate}, isPublic = #{isPublic}, heartCnt = #{heartCnt}, rate = #{rate}
+        where id = #{id}
+    </update>
+
+    <select id="findAllPlanIdsByUId" parameterType="String" resultType="int">
+        select id from userplan
+        where user_id = #{userId}
+    </select>
+
+    <select id="findEndPlanById" parameterType="String" resultMap="UserPlanDTO">
+        select * from userplan
+        where id in (select plan_id from planshareuser where user_id = #{userId})
+                and datediff(curdate(),endDate) &gt; 0
+        order by startDate asc
+    </select>
+
+    <select id="findNotEndPlanById" parameterType="String" resultMap="UserPlanDTO">
+        select * from userplan
+        where id in (select plan_id from planshareuser where user_id = #{userId})
+          and datediff(curdate(),endDate) &lt;= 0
+        order by startDate asc
+    </select>
+
+    <delete id="deleteAllUserPlanByUId" parameterType="String">
+        delete from userplan
+        where user_id = #{userId}
+    </delete>
+
+    <resultMap id="PlanLikeDTO" type="PlanLike">
+        <result column="userplan_id" property="userPlanId"></result>
+        <result column="user_id" property="userId"></result>
+    </resultMap>
+    <insert id="likePlan" parameterType="PlanLike">
+        insert into planlike(user_id, userplan_id)
+        values (#{userId},#{userPlanId})
+    </insert>
+
+    <delete id="unLikePlan" parameterType="int">
+        delete from planlike
+        where id = #{id}
+    </delete>
+
+    <select id="isLike" parameterType="PlanLike" resultMap="PlanLikeDTO">
+        select * from planlike
+        where user_id = #{userId} and userplan_id = #{userPlanId}
+    </select>
+
+    <select id="selectAllUserPlanByTotalDate" parameterType="int" resultType="int">
+        select id from userplan
+        where totaldate = #{totalDate}
+    </select>
+
+    <select id="selectPlaceListByPlanId" parameterType="int" resultType="int">
+        select place_id from routedetail
+        where route_id IN (select route_id from routes where plan_id = #{id})
+    </select>
+
+    <select id="selectThemeListByPlanId" parameterType="int" resultType="int">
+        select distinct theme_id
+        from place
+        where id IN (
+                    select place_id
+                    from routedetail
+                    where route_id IN (
+                            select route_id
+                            from routes
+                            where plan_id = #{id}))
+        order by theme_id asc
+    </select>
+
+    <delete id="deleteUserPlanByUSerId" parameterType="String">
+        delete from userplan
+        where user_id = #{userId}
+    </delete>
+
+    <select id="selectAllPlanByUserId" parameterType="String" resultMap="UserPlanDTO">
+        select p.* from planlike l, userplan p
+        where l.user_id = #{userId} and p.id = l.userplan_id
+    </select>
+
+</mapper>

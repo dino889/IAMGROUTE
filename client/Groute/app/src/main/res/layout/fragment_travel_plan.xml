@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ssafy.groute.src.viewmodel.PlanViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".src.main.travel.TravelPlanFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/travelplan_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/travelplan_back_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/travelplan_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:includeFontPadding="false"
+                android:text="@{viewModel.planList.title}"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@id/travelplan_back_iv"
+                app:layout_constraintLeft_toRightOf="@id/travelplan_back_iv"
+                app:layout_constraintTop_toTopOf="@id/travelplan_back_iv" />
+
+            <TextView
+                android:id="@+id/travelplan_period_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:includeFontPadding="false"
+                android:text="@{@string/convert_plan_date(viewModel.planList.startDate,viewModel.planList.endDate)}"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/travelplan_title_tv"
+                app:layout_constraintTop_toBottomOf="@id/travelplan_title_tv" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/travelplan_share_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/travelplan_period_tv">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/travelplan_share_iv"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="share.json"
+                    app:lottie_loop="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:includeFontPadding="false"
+                    android:text="공유하기"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@id/travelplan_share_iv"
+                    app:layout_constraintLeft_toRightOf="@id/travelplan_share_iv"
+                    app:layout_constraintTop_toTopOf="@id/travelplan_share_iv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/travelplan_member_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                app:layout_constraintRight_toLeftOf="@id/travelplan_calc_btn"
+                app:layout_constraintTop_toTopOf="@id/travelplan_calc_btn">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/travelplan_member_iv"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="member.json"
+                    app:lottie_loop="false" />
+
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:includeFontPadding="false"
+                    android:text="Member"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@id/travelplan_member_iv"
+                    app:layout_constraintLeft_toRightOf="@id/travelplan_member_iv"
+                    app:layout_constraintTop_toTopOf="@id/travelplan_member_iv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/travelplan_calc_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/travelplan_period_tv">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/travelplan_calc_iv"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="money.json"
+                    app:lottie_loop="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:includeFontPadding="false"
+                    android:text="가계부"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@id/travelplan_calc_iv"
+                    app:layout_constraintLeft_toRightOf="@id/travelplan_calc_iv"
+                    app:layout_constraintTop_toTopOf="@id/travelplan_calc_iv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RelativeLayout
+            android:id="@+id/travelplan_mapview"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/blue_500"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/travelplan_constraint">
+
+        </RelativeLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/travelplan_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/travelplan_mapview"
+            app:tabGravity="center"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabMode="scrollable">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DAY1" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/findLocation_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/travelplan_list_rv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/travelplan_tab_layout">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/travelPlan_abtn_navi"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="navi.json"
+                app:lottie_loop="false" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="길찾기"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/travelPlan_abtn_navi"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/travelPlan_ibtn_memo"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toTopOf="@+id/travelplan_list_rv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/travelplan_tab_layout"
+            app:srcCompat="@drawable/note" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/travelPlan_btn_bestPriority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/travelplan_list_rv"
+            app:layout_constraintStart_toEndOf="@+id/findLocation_btn"
+            app:layout_constraintTop_toBottomOf="@+id/travelplan_tab_layout">
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/magicwand" />
+
+            <TextView
+                android:id="@+id/textView48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="최적경로"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/imageButton4" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/travelplan_list_rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/travelPlan_ibtn_memo"
+            app:plandetailListData="@{viewModel.routeList}" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/travelplan_add_memo_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="220dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/travelplan_add_memo_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="3dp"
+                android:text="메모추가"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/travelplan_add_memo_fb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:backgroundTint="@color/blue_500"
+                android:src="@drawable/memo"
+                app:elevation="6dp"
+                app:layout_constraintBottom_toBottomOf="@id/travelplan_add_memo_tv"
+                app:layout_constraintLeft_toRightOf="@id/travelplan_add_memo_tv"
+                app:layout_constraintTop_toTopOf="@id/travelplan_add_memo_tv"
+                app:pressedTranslationZ="12dp"
+                app:tint="@color/white" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/travelplan_recom_route_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="160dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/travelplan_recom_route_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="3dp"
+                android:text="루트추천"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/travelplan_recom_route_fb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:backgroundTint="@color/blue_500"
+                android:src="@drawable/navi"
+                app:elevation="6dp"
+                app:layout_constraintBottom_toBottomOf="@id/travelplan_recom_route_tv"
+                app:layout_constraintLeft_toRightOf="@id/travelplan_recom_route_tv"
+                app:layout_constraintTop_toTopOf="@id/travelplan_recom_route_tv"
+                app:pressedTranslationZ="12dp"
+                app:tint="@color/white" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/travelplan_add_place_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="100dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/travelplan_add_place_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="3dp"
+                android:text="장소추가"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/travelplan_add_place_fb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:backgroundTint="@color/blue_500"
+                android:src="@drawable/place"
+                app:elevation="6dp"
+                app:layout_constraintBottom_toBottomOf="@id/travelplan_add_place_tv"
+                app:layout_constraintLeft_toRightOf="@id/travelplan_add_place_tv"
+                app:layout_constraintTop_toTopOf="@id/travelplan_add_place_tv"
+                app:pressedTranslationZ="12dp"
+                app:tint="@color/white" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/travelplan_add_fb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/blue_700"
+            android:src="@drawable/add"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/travelplan_close_fb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/blue_700"
+            android:src="@drawable/add"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

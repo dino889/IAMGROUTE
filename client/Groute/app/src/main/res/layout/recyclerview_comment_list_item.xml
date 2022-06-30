@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="writeUser"
+            type="com.ssafy.groute.src.dto.User" />
+        <variable
+            name="comment"
+            type="com.ssafy.groute.src.dto.Comment" />
+        <variable
+            name="boardViewModels"
+            type="com.ssafy.groute.src.viewmodel.BoardViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/comment_detail_iv_userImg"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerInside"
+        app:imageUrlUser="@{writeUser.img}"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/comment_detail_tv_userNick"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:text="@{writeUser.nickname}"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/comment_more_iv"
+            app:layout_constraintStart_toEndOf="@+id/comment_detail_iv_userImg"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/comment_detail_tv_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:text="@{comment.content}"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/comment_detail_tv_userNick" />
+<!--            android:text="최지우진짜진짜 자닌해....자닌해진쨔..."-->
+
+    <ImageView
+        android:id="@+id/comment_more_iv"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="20dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/comment_detail_tv_userNick"
+        app:layout_constraintBottom_toBottomOf="@id/comment_detail_tv_userNick"
+        android:src="@drawable/more_horiz"/>
+
+        <TextView
+            android:id="@+id/comment_nested_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:text="답글 달기"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/comment_detail_tv_comment" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comment_nested_btn" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comment_nested_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/recyclerview_nested_comment_list_item"
+        app:layout_constraintTop_toBottomOf="@id/view5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+<!--        app:listCommentNestedData="@{boardViewModels.commentNestedList}"/>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
